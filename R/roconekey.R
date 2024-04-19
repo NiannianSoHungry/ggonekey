@@ -29,6 +29,10 @@ roconekey <- function(data, start, end = start, title = NULL, y = 0.45, truth, n
         multipleROC(as.formula(paste0(truth, "~", x)), data = data, plot = F)
     })
     x <- as.list(p1)
+    auc <- lapply(x, function(x){x$auc})
+    auc <- do.call(c, auc)
+    names(auc) <- names(x)
+    x <- x[names(rev(sort(auc)))]
     no <- as.list(1:length(x))
     df <- purrr::map2_dfr(x, no, makeCoord)
     df$no <- factor(df$no)
@@ -45,18 +49,21 @@ roconekey <- function(data, start, end = start, title = NULL, y = 0.45, truth, n
     df3$cutoff <- lapply(x, function(x) {
         round(x$cutoff[[1]][1], 3)
     })
-    df$name <- lapply(df$no, function(x) {
-        names(p1)[x]
+    df$name <- lapply(df$no, function(y) {
+        names(x)[y]
     })
     df$name <- as.character(df$name)
-    df2$name <- lapply(df2$no, function(x) {
-        names(p1)[x]
+    df$name <- factor(df$name, levels = names(x))
+    df2$name <- lapply(df2$no, function(y) {
+        names(x)[y]
     })
     df2$name <- as.character(df2$name)
-    df3$name <- lapply(df3$no, function(x) {
-        names(p1)[x]
+    df2$name <- factor(df2$name, levels = names(x))
+    df3$name <- lapply(df3$no, function(y) {
+        names(x)[y]
     })
     df3$name <- as.character(df3$name)
+    df3$name <- factor(df3$name, levels = names(x))
     df3$label <- paste0("AUC:", df3$auc, "\nCutoff:", df3$cutoff)
     p <- ggplot(df, aes_string(x = "x", y = "y", group = "no", color = "no")) +
         theme_bw() +
@@ -104,3 +111,4 @@ roconekey <- function(data, start, end = start, title = NULL, y = 0.45, truth, n
   }
   return(p)
 }
+
