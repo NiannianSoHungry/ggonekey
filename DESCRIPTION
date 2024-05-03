@@ -1,8 +1,8 @@
 Package: ggonekey
 Type: Package
-Title: To draw ggplot2 plots with one single function(forest plots, multiple roc plots, sankey plots, volcano plots)
-Version: 0.1.0
-Author: person("JiangYiyang", email = "enoch_jiang@163.com", role = c("aut", "cre"))
+Title: To Draw ggplot2 Plots With One Single Function(Forest plots, Multiple ROC Curves, Sankey Plots, Volcano Plots)
+Version: 1.0.0
+Author: Jiang Yiyang
 Maintainer: JiangYiyang <enoch_jiang@163.com>
 Description: To draw ggplot2 plots with one single function(forest plots, multiple roc plots, sankey plots, volcano plots).
 License: GPL (>= 3)
