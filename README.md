@@ -11,6 +11,10 @@ To draw ggplot2 plots with one single function(forest plots, multiple roc plots,
 You can install the development version of ggonekey like so:
 
 ```r
+devtools::install_github("davidsjoberg/ggsankey")
+devtools::install_github("cardiomoon/multipleROC")
+install.packages("ggnewscale")
+install.packages("tidyverse")
 devtools::install_github("NiannianSoHungry/ggonekey")
 ```
 
@@ -95,3 +99,18 @@ volcanoonekey(
 ```
 
 ![](./img/volcanoonekey.png)
+
+### multivolcanoonekey()
+
+```R
+multiplevolcanoonekey(
+    res = DEG,
+    cluster = "cluster",
+    logFC = "logFC",
+    padj = "adj.P.Val",
+    gene = "gene",
+    top10 = T
+)
+```
+
+![](./img/multivolcanoonekey.png)
